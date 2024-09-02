@@ -21,6 +21,8 @@ class PreguntasAPIController extends Controller
     $departamentoNombre = $request->input('departamento');
     $tema = $request->input('tema');
 
+    return response()->json(['datos' => 'Tema='.$tema.'.Depto='.$departamentoNombre], 200);
+
     // Reemplazar la letra 'Ñ' con la representación adecuada para la consulta
     $departamentoNombre = str_replace('Ñ', '?', $departamentoNombre);
 
