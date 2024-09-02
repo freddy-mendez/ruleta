@@ -32,12 +32,12 @@ class PreguntasAPIController extends Controller
         return response()->json(['error' => 'Departamento no encontrado'], 404);
     }
 
-    if (!\Schema::hasTable($tema)) {
+    if (!\Schema::hasTable(strtolower($tema))) {
         return response()->json(['error' => 'Tema no válido'], 400);
     }
 
     // Realizar la consulta usando el departamento encontrado
-    $datos = \DB::table($tema)->where('idDepartamento', $departamento->id)->get();
+    $datos = \DB::table(strtolower($tema))->where('idDepartamento', $departamento->id)->get();
 
     $pregunta = Tablas::where('detalle', $tema)->get();
 
@@ -59,12 +59,12 @@ public function obtenerRespuestasIncorrectas(Request $request)
         return response()->json(['error' => 'Departamento no encontrado'], 404);
     }
 
-    if (!\Schema::hasTable($tema)) {
+    if (!\Schema::hasTable(strtolower($tema))) {
         return response()->json(['error' => 'Tema no válido'], 400);
     }
 
     // Obtener 10 respuestas incorrectas al azar
-    $respuestasIncorrectas = \DB::table($tema)
+    $respuestasIncorrectas = \DB::table(strtolower($tema))
         ->where('idDepartamento', '!=', $departamento->id)
         ->where('detalle', '!=', $respuestaCorrecta)
         ->inRandomOrder()
