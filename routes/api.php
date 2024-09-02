@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\DepartamentoAPIController;
+use App\Http\Controllers\API\PreguntasAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get("/departamento/listar", [DepartamentoAPIController::class,'index']);
+
+Route::post('/obtener-tema', [PreguntasAPIController::class,'obtenerTema']);
+Route::post('/obtener-respuestas-incorrectas', [PreguntasAPIController::class,'obtenerRespuestasIncorrectas']);
